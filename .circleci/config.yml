@@ -127,7 +127,7 @@ jobs:
       - run: # run snyk test - run snyk testa
             name: snyk test
             command: |
-              snyk test --severity-threshold=low --all-projects --command=python3 --json-file-output=/root/project/test-results/snyk-scan.json || snyk monitor --all-projects --command=python3 && false
+              snyk test --severity-threshold=low --all-projects --command=python3 --json-file-output=/root/project/test-results/snyk-scan.json --debug || snyk monitor --all-projects --command=python3 && false
       - store_artifacts:
           path: test-results
           destination: test-results
