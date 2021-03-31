@@ -100,6 +100,39 @@ jobs:
           destination: test-results
       - store_test_results:
           path: test-results
+  snyk:
+    docker: 
+      - image: circleci/python:3.7
+        user: root
+    steps:
+      - checkout
+      - run:
+          name: install-snyk
+          command: |
+              #!/bin/bash -eo pipefail
+              if [[ ! -x "/usr/local/bin/snyk" ]]; then
+                if [[ "linux" == "alpine" && "true" == "true" ]]; then
+                  apk add -q --no-progress --no-cache curl wget libstdc++ sudo
+                fi
+                curl -s https://api.github.com/repos/snyk/snyk/releases/latest | grep "browser_download_url" | grep linux | cut -d '"' -f 4 | xargs -n 1 curl -LO
+                sha256sum -c snyk-linux.sha256
+                sudo mv snyk-linux /usr/local/bin/snyk
+                sudo chmod +x /usr/local/bin/snyk
+              fi
+              snyk config set disableSuggestions=true
+              snyk auth $SNYK_TOKEN   
+      - run: # run snyk auth - authenticate snyk use environment variables to add token
+          name: snyk auth
+          command: snyk auth $SNYK_TOKEN
+      - run: # run snyk test - run snyk testa
+            name: snyk test
+            command: |
+              snyk test --severity-threshold=low --all-projects --command=python3 --json-file-output=/root/project/test-results/snyk-scan.json || snyk monitor --all-projects --command=python3 && false
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+      - store_test_results:
+          path: test-results
 
   release:
     docker:
@@ -165,6 +198,12 @@ workflows:
       - semgrep:
           context:
             - gdi-semgrep      
+          filters:
+            branches:
+              only: /.*/
+      - snyk:
+          context:
+            - gdi-snyk     
           filters:
             branches:
               only: /.*/
