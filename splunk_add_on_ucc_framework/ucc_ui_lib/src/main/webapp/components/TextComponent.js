@@ -2,6 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Text from '@splunk/react-ui/Text';
 
+// NOTE: The resolve will only be executed if the globalConfig exist
+export function loadGlobalConfig() {
+    // Get the configuraiton json file in sync mode
+    return new Promise((resolve, reject) => {
+        fetch(`${getBuildDirPath()}/globalConfig.json`).then((res) => {
+            return res.json();     
+        }).then((json) => {
+            // window.__globalConfig = json;
+            resolve(json);
+        }).catch((err) => {
+            reject(err);
+        });
+    });
+}
+
 class TextComponent extends Component {
 
     handleChange = (e, {value}) => {
