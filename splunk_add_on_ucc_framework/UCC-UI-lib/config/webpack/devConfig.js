@@ -12,10 +12,6 @@ module.exports = {
         new webpack.DefinePlugin({
             __CONFIG_FROM_FILE__: false
         }),
-        // Use old watching plugin as the bug below
-        // https://github.com/webpack/webpack/issues/675#issuecomment-224991459
-        new webpack.OldWatchingPlugin(),
-        new BundleAnalyzerPlugin(),
         new LicenseWebpackPlugin({
             outputFilename: '[name].[hash].licenses.txt',
             perChunkOutput: true,
