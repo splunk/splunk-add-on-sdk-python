@@ -25,6 +25,7 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
+    "license-webpack-plugin": "^2.3.18",
     "mocha": "^2.3.3",
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
