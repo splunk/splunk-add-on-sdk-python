@@ -1,8 +1,10 @@
 var webpack = require('webpack');
+const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
 
 module.exports = {
     devtool: 'null',
     plugins: [
+        new LicenseWebpackPlugin(),
         new webpack.optimize.CommonsChunkPlugin('common.js'),
         new webpack.DefinePlugin({
             __CONFIG_FROM_FILE__: false
