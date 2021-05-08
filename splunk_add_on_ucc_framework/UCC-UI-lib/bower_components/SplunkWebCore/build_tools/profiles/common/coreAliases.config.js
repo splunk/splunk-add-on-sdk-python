@@ -6,7 +6,6 @@ module.exports = {
             'jquery$': 'shim/jquery',
             'moment': 'contrib/moment',
             'numeral': 'shim/numeral',
-            'highcharts.runtime_patches': 'contrib/highcharts-4.0.4/runtime_patches',
             'backbone_validation': 'contrib/backbone-validation-amd',
             'intro': 'shim/intro',
             'document-register-element': 'contrib/polyfills/document-register-element.max.amd',
@@ -37,7 +36,6 @@ module.exports = {
             // other contrib libraries
             'underscore': 'require/underscore', // shim shared with requirejs config
             'backbone': 'require/backbone', // shim shared with requirejs config
-            'highcharts': 'shim/highcharts',
             'prettify': 'shim/prettify',
             'requirejs': 'shim/requirejs',
 

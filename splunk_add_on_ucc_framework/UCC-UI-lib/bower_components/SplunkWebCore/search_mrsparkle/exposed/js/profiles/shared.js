@@ -69,8 +69,6 @@ requirejs.config({
         'numeral': 'contrib/numeral',
         'underscore': 'require/underscore',
         'backbone': 'require/backbone',
-        'highcharts': 'contrib/highcharts-4.0.4/highcharts',
-        'highcharts.runtime_patches': 'contrib/highcharts-4.0.4/runtime_patches',
         'backbone_validation': 'contrib/backbone-validation-amd',
         'prettify': 'contrib/google-code-prettify/prettify',
         'intro': 'contrib/intro',
@@ -292,18 +290,6 @@ requirejs.config({
             // Not sure if needed
             deps: ['backbone'],
             exports: 'Backbone.NestedModel'
-        },
-        highcharts: {
-            deps: ['jquery', 'splunk', 'highcharts.runtime_patches'],
-            init: function($, Splunk, runtimePatches) {
-                var Highcharts = Splunk.Highcharts = this.Highcharts;
-                // Remove Highcharts from the global namespace so multiple versions can
-                // co-exist on the same page.  As a safety measure in case existing external
-                // code relies on this global, it is still available as `Splunk.Highcharts`.
-                delete this.Highcharts;
-                runtimePatches.applyPatches(Highcharts);
-                return Highcharts;
-            }
         },
         prettify: {
             exports: 'prettyPrint'

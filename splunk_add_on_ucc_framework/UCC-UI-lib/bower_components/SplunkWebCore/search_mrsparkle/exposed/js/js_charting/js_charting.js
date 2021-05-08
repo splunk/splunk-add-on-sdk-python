@@ -1,7 +1,6 @@
 define([
             'jquery', 
             'underscore',
-            'highcharts',
             'helpers/user_agent',
             './helpers/DataSet',
             './visualizations/charts/Chart',
