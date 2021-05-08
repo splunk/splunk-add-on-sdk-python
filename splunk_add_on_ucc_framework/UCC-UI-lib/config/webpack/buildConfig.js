@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin;
 
 module.exports = {
     devtool: 'null',
@@ -10,11 +9,6 @@ module.exports = {
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: { warnings: false }
-        }),
-        new LicenseWebpackPlugin({
-            outputFilename: '[name].[hash].licenses.txt',
-            perChunkOutput: true,
-            addBanner: true
         })
     ]
 };
